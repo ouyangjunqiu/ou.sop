@@ -1,0 +1,21 @@
+{
+  "name": "phpservice/phpservice",
+  "description": "service for PHP",
+  "keywords": ["service", "daemon", "cli service"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "oshine",
+      "email": "oyjqdlp@126.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.9"
+  },
+  "autoload": {
+    "psr-0": {
+      "Service": "src/"
+    }
+  },
+  "bin": ["bin/service"]
+}
