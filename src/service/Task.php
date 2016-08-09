@@ -5,7 +5,7 @@
  * @version Created by 16/8/9 12:02
  */
 
-namespace service;
+namespace phpservice\service;
 
 
 class Task

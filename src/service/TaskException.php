@@ -5,7 +5,7 @@
  * @version Created by 16/8/9 14:09
  */
 
-namespace service;
+namespace phpservice\service;
 
 
 class TaskException extends \Exception
