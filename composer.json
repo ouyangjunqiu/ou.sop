@@ -13,8 +13,8 @@
     "php": ">=5.3.9"
   },
   "autoload": {
-    "psr-0": {
-      "Service": "src/"
+    "psr-4": {
+      "phpservice\\": "src/"
     }
   },
   "bin": ["bin/service"]

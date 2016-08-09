@@ -5,7 +5,7 @@
  * @version Created by 16/8/9 14:11
  */
 
-namespace Service;
+namespace service;
 
 // Log message levels
 define('DLOG_TO_CONSOLE', 1);
