@@ -2,8 +2,8 @@
 <?php
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-$task = new Service\Task();
+$task = new \Service\Task();
 
-$daemon = new Service\Daemon($task);
+$daemon = new \Service\Daemon($task);
 
 $daemon->start();
