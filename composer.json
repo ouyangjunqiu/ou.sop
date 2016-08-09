@@ -10,7 +10,10 @@
     }
   ],
   "require": {
-    "php": ">=5.3.9"
+    "php": ">=5.3.9",
+    "ext-pcntl":"*",
+    "ext-posix":"*",
+    "croon/croon":"*"
   },
   "autoload": {
     "psr-4": {

@@ -44,7 +44,7 @@ class Daemon
      * @var bool
      * @since 1.0.3
      */
-    private $requireSetIdentity = false;
+    protected $requireSetIdentity = false;
 
     /**
      * Path to PID file
@@ -52,7 +52,7 @@ class Daemon
      * @var string
      * @since 1.0.1
      */
-    private $pidFileLocation = '/tmp/service.daemon.pid';
+    protected $pidFileLocation = '/tmp/service.daemon.pid';
 
     /**
      * Home path
@@ -60,7 +60,7 @@ class Daemon
      * @var string
      * @since 1.0
      */
-    private $homePath = '/';
+    protected $homePath = '/';
     /**#@-*/
 
 
