@@ -24,7 +24,7 @@ class CroonTask extends Task
                 'fields' => array('time', 'command')
             ),
             'log' => array(
-                'file' => dirname(dirname(dirname(__FILE__)))."/data/croon.log"
+                'file' => dirname(dirname(dirname(dirname(__FILE__))))."/data/runtime/croon.log"
             )
         ));
         $croon->run();
