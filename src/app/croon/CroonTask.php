@@ -29,6 +29,8 @@ class CroonTask extends Task
         ));
         $croon->run();
 
+        sleep(5);
+
     }
 
 }
