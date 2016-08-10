@@ -2,21 +2,21 @@
 namespace phpservice\service;
 
 
-    /**
-     * Daemon base class
-     *
-     * Requirements:
-     * Unix like operating system
-     * PHP 4 >= 4.3.0 or PHP 5
-     * PHP compiled with:
-     * --enable-sigchild
-     * --enable-pcntl
-     *
-     * @package binarychoice.system.unix
-     * @author Michal 'Seth' Golebiowski <seth at binarychoice dot pl>
-     * @copyright Copyright 2005 Seth
-     * @since 1.0.3
-     */
+/**
+ * Daemon base class
+ *
+ * Requirements:
+ * Unix like operating system
+ * PHP 4 >= 4.3.0 or PHP 5
+ * PHP compiled with:
+ * --enable-sigchild
+ * --enable-pcntl
+ *
+ * @package binarychoice.system.unix
+ * @author Michal 'Seth' Golebiowski <seth at binarychoice dot pl>
+ * @copyright Copyright 2005 Seth
+ * @since 1.0.3
+ */
 class Daemon
 {
     /**#@+
@@ -118,8 +118,7 @@ class Daemon
      */
     public function start()
     {
-        if (!$this->_daemonize())
-        {
+        if (!$this->_daemonize()) {
             Logger::log('Could not start daemon', DLOG_ERROR);
 
             return false;
@@ -128,8 +127,7 @@ class Daemon
         $this->_isRunning = true;
 
 
-        while ($this->_isRunning)
-        {
+        while ($this->_isRunning) {
             $this->_doTask();
         }
 
@@ -145,7 +143,7 @@ class Daemon
      */
     public function stop()
     {
-       $this->_isRunning = false;
+        $this->_isRunning = false;
     }
 
     /**
@@ -154,11 +152,13 @@ class Daemon
     protected function _doTask()
     {
         // override this method
-        if($this->task != null && $this->task instanceof Task){
-            try{
+        if ($this->task != null && $this->task instanceof Task) {
+            try {
                 $this->task->run();
-            }catch(TaskException $e){
-                Logger::log($e->getMessage(),DLOG_ERROR);
+            } catch (TaskException $e) {
+                Logger::log($e->getMessage(), DLOG_ERROR);
+            } catch (\Exception $e){
+                Logger::log($e->getMessage(), DLOG_ERROR);
             }
         }
 
@@ -184,39 +184,32 @@ class Daemon
     {
         #ob_end_flush();
 
-        if ($this->_isDaemonRunning())
-        {
+        if ($this->_isDaemonRunning()) {
             // Deamon is already running. Exiting
             return false;
         }
 
-        if (!$this->_fork())
-        {
+        if (!$this->_fork()) {
             // Coudn't fork. Exiting.
             return false;
         }
 
-        if (!$this->_setIdentity() && $this->requireSetIdentity)
-        {
+        if (!$this->_setIdentity() && $this->requireSetIdentity) {
             // Required identity set failed. Exiting
             return false;
         }
 
-        if (!posix_setsid())
-        {
+        if (!posix_setsid()) {
             Logger::log('Could not make the current process a session leader', DLOG_ERROR);
 
             return false;
         }
 
-        if (!$fp = @fopen($this->pidFileLocation, 'w'))
-        {
+        if (!$fp = @fopen($this->pidFileLocation, 'w')) {
             Logger::log('Could not write to PID file', DLOG_ERROR);
 
             return false;
-        }
-        else
-        {
+        } else {
             fputs($fp, $this->_pid);
             fclose($fp);
         }
@@ -243,14 +236,11 @@ class Daemon
     {
         $oldPid = @file_get_contents($this->pidFileLocation);
 
-        if ($oldPid !== false && posix_kill(trim($oldPid),0))
-        {
-            Logger::log('Daemon already running with PID: '.$oldPid, (DLOG_TO_CONSOLE | DLOG_ERROR));
+        if ($oldPid !== false && posix_kill(trim($oldPid), 0)) {
+            Logger::log('Daemon already running with PID: ' . $oldPid, (DLOG_TO_CONSOLE | DLOG_ERROR));
 
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -271,17 +261,15 @@ class Daemon
             Logger::log('Could not fork', DLOG_ERROR);
 
             return false;
-        }
-        else if ($pid>0) // parent
+        } else if ($pid > 0) // parent
         {
             exit();
-        }
-        else // children
+        } else // children
         {
 
             $this->_isChildren = true;
             $this->_pid = posix_getpid();
-            Logger::log('Children Run'.$this->_pid);
+            Logger::log('Children Run' . $this->_pid);
             return true;
         }
     }
@@ -295,14 +283,11 @@ class Daemon
      */
     private function _setIdentity()
     {
-        if (!posix_setgid($this->groupID) || !posix_setuid($this->userID))
-        {
+        if (!posix_setgid($this->groupID) || !posix_setuid($this->userID)) {
             Logger::log('Could not set identity', DLOG_WARNING);
 
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
@@ -312,14 +297,13 @@ class Daemon
      */
     public function sigHandler($sigNo)
     {
-        switch ($sigNo)
-        {
+        switch ($sigNo) {
             case SIGTERM:   // Shutdown
                 exit();
                 break;
 
             case SIGCHLD:   // Halt
-                while (pcntl_waitpid(-1, $status, WNOHANG) > 0);
+                while (pcntl_waitpid(-1, $status, WNOHANG) > 0) ;
                 break;
         }
     }
@@ -334,8 +318,7 @@ class Daemon
      */
     public function releaseDaemon()
     {
-        if ($this->_isChildren && file_exists($this->pidFileLocation))
-        {
+        if ($this->_isChildren && file_exists($this->pidFileLocation)) {
             unlink($this->pidFileLocation);
         }
     }
