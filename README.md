@@ -9,6 +9,7 @@ Task 运行的任务或者事项.
 
 案例:
 1. 创建一个Task,每隔1s往文件中写入"Hello!",文件名:src/app/simple/SimpleTask.php
+
 <?php
 namespace phpservice\app\simple;
 use phpservice\service\Task;
@@ -23,6 +24,7 @@ class SimpleTask extends Task {
 2. 创建一个可执行程序,如:bin/SimpleService
 
 #!/usr/bin/env php
+
 <?php
 require dirname(__DIR__) . '/vendor/autoload.php';
 
