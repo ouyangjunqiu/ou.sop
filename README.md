@@ -34,7 +34,8 @@ service基础框架
 3.  执行,赋予bin/SimpleService可执行权限,命令行运行
 
 	*bin/SimpleService*
+	
 
 4.  如何结束
-
+ 
 	*kill -9 进程号*
