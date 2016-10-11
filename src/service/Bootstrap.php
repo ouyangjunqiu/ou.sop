@@ -23,11 +23,9 @@ class Bootstrap {
             ));
         }
 
-        return self::$serv;
-
     }
 
-    public static function boot(){
+    public function boot(){
 
         $dispatch = new Dispatch();
 

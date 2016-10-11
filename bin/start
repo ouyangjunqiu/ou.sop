@@ -4,4 +4,5 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 \ou\sop\service\utils\Logger::init(dirname(dirname(__FILE__))."/data");
 
-\ou\sop\service\Bootstrap::boot();
+$bootstrap = new \ou\sop\service\Bootstrap();
+$bootstrap->boot();
