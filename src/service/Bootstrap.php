@@ -5,6 +5,7 @@
  * @version Created by 2016/10/11 09:55
  */
 namespace ou\sop\service;
+use swoole_server;
 
 class Bootstrap {
 
