@@ -1,7 +1,7 @@
 {
-  "name": "phpservice/phpservice",
-  "description": "service for PHP",
-  "keywords": ["service", "daemon", "cli service"],
+  "name": "ou/sop",
+  "description": "sop for PHP",
+  "keywords": ["sop","service", "daemon", "cli service"],
   "license": "MIT",
   "authors": [
     {
@@ -11,14 +11,12 @@
   ],
   "require": {
     "php": ">=5.3.9",
-    "ext-pcntl":"*",
-    "ext-posix":"*",
-    "croon/croon":"*"
+    "ext-swoole":"*"
   },
   "autoload": {
     "psr-4": {
-      "phpservice\\": "src/"
+      "ou\\sop\\": "src/"
     }
   },
-  "bin": ["bin/service"]
+  "bin": ["bin/start"]
 }

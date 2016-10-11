@@ -1,9 +1,0 @@
-#!/usr/bin/env php
-<?php
-require dirname(__DIR__) . '/vendor/autoload.php';
-
-$task = new phpservice\app\croon\CroonTask();
-
-$daemon = new phpservice\app\croon\CroonDaemon($task);
-
-$daemon->start();

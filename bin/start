@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+\ou\sop\service\utils\Logger::init(dirname(dirname(__FILE__))."/data");
+
+$serv = \ou\sop\service\Bootstrap::boot();
+$serv->start();
