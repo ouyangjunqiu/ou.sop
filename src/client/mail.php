@@ -10,5 +10,5 @@ if (!$client->connect('127.0.0.1', 9501, -1))
 {
     exit("connect failed. Error: {$client->errCode}\n");
 }
-$client->send(json_encode(array("exec"=>"test")));
+$client->send(json_encode(array("exec"=>"mail","subject"=>"测试邮件","msg"=>"这是系统测试邮件发出，请勿理会。","address"=>array("oshine"=>"oshine.ouyang@da-mai.com"))));
 $client->close();
