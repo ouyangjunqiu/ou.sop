@@ -1,41 +1,27 @@
-# phpservice
-service基础框架
+# ou.sop
+swoole面向服务编程案例
 
-**service基础框架包括Daemon和Task,Daemon以服务的形式运行.Task运行的任务或者事项.**
+>Swoole : PHP的异步、并行、高性能网络通信引擎，使用纯C语言编写，提供了PHP语言的异步多线程服务器，异步TCP/UDP网络客户端，异步MySQL，异步Redis，数据库连接池，AsyncTask，消息队列，毫秒定时器，异步文件读写，异步DNS查询。
+
 
 ####案例:
-1.  创建一个Task,每隔1s往文件中写入"Hello!",文件名:src/app/simple/SimpleTask.php
-
-	<?php
+1. 邮件服务
 	
-		namespace phpservice\app\simple;
-		use phpservice\service\Task;
-		class SimpleTask extends Task {
-   			public function run(){
-        		file_put_contents("/tmp/simple.task.txt","Hello!");
-        		sleep(1);
-   			}
+	
+		$client = new swoole_client(SWOOLE_SOCK_TCP);
+		
+		if (!$client->connect('127.0.0.1', 9501, -1))
+		{
+		
+		    exit("connect failed. Error: {$client->errCode}\n");
 		}
+		
+		$msg = array("exec"=>"mail","subject"=>"测试邮件","msg"=>"这是系统测试邮件发出，请勿理会。","address"=>array("oshine"=>"oshine.ouyang@da-mai.com"));
+		$msg = json_encode($msg);
+		$client->send($msg);
+		
+		$client->close();
 	
-2.  创建一个可执行程序,如:bin/SimpleService
-
-	**#!/usr/bin/env php**
-
-	<?php
-
-		require dirname(__DIR__) . '/vendor/autoload.php';
-
-		$task = new phpservice\app\simple\SimpleTask();
-
-		$daemon = new phpservice\service\Daemon($task);
-
-		$daemon->start();
-
-3.  执行,赋予bin/SimpleService可执行权限,命令行运行
-
-	*bin/SimpleService*
 	
-
-4.  如何结束
- 
-	*kill -9 进程号*
+2. 数据分析服务
+	
