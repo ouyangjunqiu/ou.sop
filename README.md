@@ -4,6 +4,14 @@ swoole面向服务编程案例
 >Swoole : PHP的异步、并行、高性能网络通信引擎，使用纯C语言编写，提供了PHP语言的异步多线程服务器，异步TCP/UDP网络客户端，异步MySQL，异步Redis，数据库连接池，AsyncTask，消息队列，毫秒定时器，异步文件读写，异步DNS查询。
 
 
+####安装：
+	git clone https://github.com/ouyangjunqiu/ou.sop
+	cd ou.sop/
+	composer install
+	
+####启动：
+	bin/start
+
 ####案例:
 1. 邮件服务
 	
